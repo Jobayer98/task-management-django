@@ -10,19 +10,13 @@ class Task(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     priority = models.CharField(max_length=10, choices=priority_choices)
     is_complete = models.BooleanField(default=False)
-    due_date = models.DateField()
+    due_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='task_photos/', null=True, blank=True)
     
     def __str__(self):
         return self.title
-    
-class TaskPhoto(models.Model):
-    task = models.ForeignKey(Task, related_name='photos', on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='task_photos/', null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.task.title} - Photo {self.id}'

@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
   </head>
   <body class="bg-[#0f172a] text-slate-300">
-    {% block content %} {%endblock %}
+    {% include 'navbar.html'%} {% block content %} {%endblock %}
   </body>
 </html>

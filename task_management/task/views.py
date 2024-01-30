@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginForm, TaskForm
+from .forms import TaskForm
 from .models import Task
 
 class SignUpView(CreateView):
@@ -31,7 +31,7 @@ class LoginView(TemplateView):
             return redirect('task_list')
         return self.render_to_response({'form': form})
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'task/task_list.html'
     context_object_name = 'tasks'
@@ -58,15 +58,21 @@ class TaskListView(ListView):
         due_date_filter = self.request.GET.get('due_date', '')
         if due_date_filter:
             queryset = queryset.filter(due_date=due_date_filter)
-
+            
+        # Filter by is_complete
+        is_complete_filter = self.request.GET.get('is_complete', '')
+        print(is_complete_filter)
+        if is_complete_filter:
+            queryset = queryset.filter(is_complete=is_complete_filter)
+            
         return queryset
     
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'task/task_detail.html'
     context_object_name = 'task'
 
-class CreateTaskView(CreateView):
+class CreateTaskView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'task/create_task.html'
@@ -76,13 +82,13 @@ class CreateTaskView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
  
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = 'task/update_task.html'
     form_class = TaskForm
     success_url = reverse_lazy('task_list')
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'task/delete_task.html'
     success_url = reverse_lazy('task_list')
