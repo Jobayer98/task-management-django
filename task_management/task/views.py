@@ -37,7 +37,29 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        return Task.objects.all()
+        queryset = Task.objects.all()
+
+        # Handle search query
+        search_query = self.request.GET.get('search', '')
+        if search_query:
+            queryset = queryset.filter(title__icontains=search_query)
+
+         # Filter by priority
+        priority_filter = self.request.GET.get('priority', '')
+        if priority_filter:
+            queryset = queryset.filter(priority=priority_filter)
+
+        # Filter by creation date
+        created_at_filter = self.request.GET.get('created_at', '')
+        if created_at_filter:
+            queryset = queryset.filter(created_at=created_at_filter)
+
+        # Filter by due date
+        due_date_filter = self.request.GET.get('due_date', '')
+        if due_date_filter:
+            queryset = queryset.filter(due_date=due_date_filter)
+
+        return queryset
     
 class TaskDetailView(DetailView):
     model = Task
