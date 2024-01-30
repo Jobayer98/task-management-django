@@ -9,7 +9,7 @@ from .models import Task
 
 class SignUpView(CreateView):
     template_name = 'task/signup.html'
-    form_class = SignUpForm
+    form_class = UserCreationForm
     success_url = reverse_lazy('task_list')
 
     def form_valid(self, form):
@@ -24,7 +24,7 @@ class LoginView(TemplateView):
     template_name = 'task/login.html'
 
     def post(self, request, *args, **kwargs):
-        form = LoginForm(request.POST)
+        form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
