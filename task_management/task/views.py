@@ -53,7 +53,7 @@ class CreateTaskView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
+ 
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'task/update_task.html'
