@@ -13,6 +13,7 @@ class Task(models.Model):
     description = models.TextField()
     priority = models.CharField(max_length=10, choices=priority_choices)
     is_complete = models.BooleanField(default=False)
+    due_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
