@@ -3,25 +3,25 @@ from .models import Task
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password1', 'password2']
-        widgets = {
-            "username": forms.TextInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your username"}),
-            "email": forms.EmailInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your email"}),
-            "password1": forms.PasswordInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your password"}),
-            "password2": forms.PasswordInput(attrs={"class": "bg-blue-100", "placeholder": "Confirm your password"}),
-        }
+# class CustomUserCreationForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password1', 'password2']
+#         widgets = {
+#             "username": forms.TextInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your username"}),
+#             "email": forms.EmailInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your email"}),
+#             "password1": forms.PasswordInput(attrs={"class": "bg-blue-100", "placeholder": "Enter your password"}),
+#             "password2": forms.PasswordInput(attrs={"class": "bg-blue-100", "placeholder": "Confirm your password"}),
+#         }
 
-class CustomAuthenticationForm(AuthenticationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
-        widgets = {
-            "username": forms.TextInput(attrs={"class": "bg-green-100", "placeholder": "Enter your username"}),
-            "password": forms.PasswordInput(attrs={"class": "bg-green-100", "placeholder": "Enter your password"}),
-        }
+# class CustomAuthenticationForm(AuthenticationForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
+#         widgets = {
+#             "username": forms.TextInput(attrs={"class": "bg-green-100", "placeholder": "Enter your username"}),
+#             "password": forms.PasswordInput(attrs={"class": "bg-green-100", "placeholder": "Enter your password"}),
+#         }
 
 class TaskForm(forms.ModelForm):
     class Meta:

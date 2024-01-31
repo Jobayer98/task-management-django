@@ -25,7 +25,6 @@ class LoginView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = AuthenticationForm(request, request.POST)
-        print(form.is_valid())
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -38,7 +37,7 @@ class TaskListView(LoginRequiredMixin, ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        queryset = Task.objects.all()
+        queryset = Task.objects.filter(user=self.request.user)
 
         # Handle search query
         search_query = self.request.GET.get('search', '')
@@ -94,5 +93,3 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'task/delete_task.html'
     success_url = reverse_lazy('task_list')
     
-def custom_404(request, exception):
-    return render(request, '404.html', status=404)
