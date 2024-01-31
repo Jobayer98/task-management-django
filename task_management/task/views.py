@@ -25,6 +25,7 @@ class LoginView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = AuthenticationForm(request, request.POST)
+        print(form.is_valid())
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -76,7 +77,7 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'task/create_task.html'
-    success_url = reverse_lazy('task/task_list')
+    success_url = reverse_lazy('task_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

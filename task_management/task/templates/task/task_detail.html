@@ -1,14 +1,158 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="flex justify-center align-center">
+  <div class="w-1/2">
+    <figure class="w-full">
+      <img
+        class="h-auto max-w-full rounded-lg"
+        src="/docs/images/examples/image-3@2x.jpg"
+        alt="image description"
+      />
+      <figcaption
+        class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400"
+      >
+        Image caption
+      </figcaption>
+    </figure>
 
-{% block content %}
-<h2>Task Detail</h2>
-<p>Title: {{ task.title }}</p>
-<p>Description: {{ task.description }}</p>
-<p>Priority: {{ task.priority }}</p>
-<p>Is Completed: {{ task.is_complete }}</p>
-<p>Due Date: {{ task.due_date }}</p>
-<p>Created Date: {{ task.created_at }}</p>
-<p>Updated Date: {{ task.updated_at }}</p>
-<a href="{%url 'task-update' task.id %}">Update</a>
-<a href="{%url 'task-delete' task.id %}">Delete</a>
+    <div
+      class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h5
+          class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white"
+        >
+          Task Details
+        </h5>
+      </div>
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Title
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.title }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Description
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.description }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Priority
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.priority }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Is Completed
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.is_complete }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Due Date
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.due_date }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Created Date
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.created_at }}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-4">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  Updated Date
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                {{ task.updated_at }}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center">
+      <a
+        class="text-xl bg-blue-700 text-slate-200 px-2 py-1 rounded inline-block my-5"
+        href="{%url 'task-update' task.id %}"
+        >Update</a
+      >
+      <a
+        class="text-xl bg-red-700 text-slate-200 px-2 py-1 rounded inline-block my-5"
+        href="{%url 'task-delete' task.id %}"
+        >Delete</a
+      >
+    </div>
+  </div>
+</div>
 {% endblock %}

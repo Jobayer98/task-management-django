@@ -1,11 +1,18 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h2>Delete Task</h2>
-<p>Are you sure you want to delete the task "{{ task.title }}"?</p>
-<form method="post" class="max-w-md mx-auto my-5 p-5 bg-white rounded-md shadow-md">
-    {% csrf_token %}
-    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md">Delete Task</button>
-    <a href="{% url 'task_list' %}">Cancel</a>
+{% extends 'base.html' %} {% block content %}
+<div>
+  <h2 class="text-xl text-center my-5">Delete Task</h2>
+  <p class="block text-center my-2">
+    Are you sure you want to delete the task "{{ task.title }}"?
+  </p>
+</div>
+<form
+  method="post"
+  class="max-w-md mx-auto my-5 p-5 bg-white rounded-md shadow-md"
+>
+  {% csrf_token %}
+  <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md">
+    Delete Task
+  </button>
+  <a class="text-gray-800" href="{% url 'task_list' %}">Cancel</a>
 </form>
 {% endblock %}

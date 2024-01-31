@@ -1,17 +1,19 @@
 {% extends 'base.html' %} {% block content %}
 <form
   method="post"
-  class="max-w-md mx-auto mt-32 p-5 bg-white rounded-md shadow-md"
+  class="max-w-md mx-auto mt-32 p-5 dark:bg-gray-800 dark:border-gray-700 rounded-md shadow-md text-white"
 >
   {% csrf_token %}
   <div class="mb-4">
-    <label for="{{ form.username.id_for_label }}" class="block text-gray-800"
+    <label
+      for="{{ form.username.id_for_label }}"
+      class="block text-gray-100 text-sm font-medium"
       >Username</label
     >
     {{ form.username }}
   </div>
   <div class="mb-4">
-    <label for="{{ form.password1.id_for_label }}" class="block text-gray-800"
+    <label for="{{ form.password1.id_for_label }}" class="block text-gray-100"
       >Password</label
     >
     {{ form.password }}
