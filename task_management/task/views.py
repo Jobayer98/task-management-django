@@ -1,35 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login,logout, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import TaskForm
 from .models import Task
-
-class SignUpView(CreateView):
-    template_name = 'task/signup.html'
-    form_class = UserCreationForm
-    success_url = reverse_lazy('task_list')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        username = form.cleaned_data.get('username')
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=raw_password)
-        login(self.request, user)
-        return response
-
-class LoginView(TemplateView):
-    template_name = 'task/login.html'
-
-    def post(self, request, *args, **kwargs):
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('task_list')
-        return self.render_to_response({'form': form})
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
@@ -93,3 +70,36 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'task/delete_task.html'
     success_url = reverse_lazy('task_list')
     
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('task_list')
+        else:
+            messages.success(request, ("Authentication failed, try again"))
+            return redirect('login') 
+    else:
+        return render(request, 'authentication/login.html', {})
+
+        
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+def register_user(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("Authentication failed, try again"))
+            return redirect('task_list')
+    else:
+        return render(request, 'authentication/signup.html', {})
