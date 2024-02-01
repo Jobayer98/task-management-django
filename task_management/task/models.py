@@ -8,7 +8,6 @@ class Task(models.Model):
         ('medium', 'Medium'),
         ('high', 'High'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     priority = models.CharField(max_length=10, choices=priority_choices)
