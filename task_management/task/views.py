@@ -38,7 +38,6 @@ class TaskListView(LoginRequiredMixin, ListView):
             
         # Filter by is_complete
         is_complete_filter = self.request.GET.get('is_complete', '')
-        print(is_complete_filter)
         if is_complete_filter:
             queryset = queryset.filter(is_complete=is_complete_filter)
             
