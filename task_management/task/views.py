@@ -103,3 +103,7 @@ def register_user(request):
             return redirect('task_list')
     else:
         return render(request, 'authentication/signup.html', {})
+
+
+def index(request):
+    return render(request, 'index.html', {})

@@ -1,21 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <div class="flex justify-center align-center">
   <div class="w-1/2">
-    <figure class="w-full">
-      <img
-        class="h-auto max-w-full rounded-lg"
-        src="/docs/images/examples/image-3@2x.jpg"
-        alt="image description"
-      />
-      <figcaption
-        class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400"
-      >
-        Image caption
-      </figcaption>
-    </figure>
-
+    <img src="{{task.photo.url}}" alt="image" />
     <div
-      class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+      class="w-full p-4 bg-white rounded-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700"
     >
       <div class="flex items-center justify-between mb-4">
         <h5
