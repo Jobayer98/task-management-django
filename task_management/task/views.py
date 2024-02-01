@@ -99,7 +99,6 @@ def register_user(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ("Authentication failed, try again"))
             return redirect('task_list')
     else:
         return render(request, 'authentication/signup.html', {})
